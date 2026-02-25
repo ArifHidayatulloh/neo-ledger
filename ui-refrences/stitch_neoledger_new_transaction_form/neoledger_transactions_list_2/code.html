@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NeoLedger Reports &amp; Forecasting</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338CA;
+            --emerald-brand: #10B981;
+            --slate-50: #F8FAFC;
+            --slate-100: #F1F5F9;
+            --slate-200: #E2E8F0;
+            --slate-800: #1E293B;
+            --slate-900: #0F172A;
+        }
+        @theme {
+            --font-sans: 'Inter', ui-sans-serif, system-ui;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .chart-gradient-hist {
+            fill: url(#grad-hist);
+        }
+        .chart-gradient-pred {
+            fill: url(#grad-pred);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-[#F9FAFB] text-slate-900 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 bg-slate-900 flex-shrink-0 hidden lg:flex flex-col border-r border-slate-800">
+<div class="p-6 flex items-center gap-3">
+<div class="size-9 flex items-center justify-center bg-indigo-600 rounded-xl shadow-lg shadow-indigo-500/20">
+<span class="material-symbols-outlined text-white text-xl">account_balance_wallet</span>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight">NeoLedger</h2>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+<p class="px-2 mb-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Main Menu</p>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">swap_horiz</span>
+<span class="text-sm font-medium">Transactions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">account_balance</span>
+<span class="text-sm font-medium">Accounts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-indigo-600/10 text-indigo-400 rounded-lg transition-all border border-indigo-500/20" href="#">
+<span class="material-symbols-outlined text-[22px]">analytics</span>
+<span class="text-sm font-semibold">Reports &amp; Forecasting</span>
+</a>
+<div class="mt-8">
+<p class="px-2 mb-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Advanced</p>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">model_training</span>
+<span class="text-sm font-medium">Scenario Planner</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</nav>
+<div class="p-4 mt-auto border-t border-slate-800">
+<div class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50">
+<div class="flex items-center gap-3 mb-2">
+<div class="size-8 rounded-full bg-indigo-500 flex items-center justify-center text-xs font-bold text-white uppercase">JD</div>
+<div class="overflow-hidden">
+<p class="text-xs font-bold text-white truncate">John Doe</p>
+<p class="text-[10px] text-slate-500 truncate">Pro Account</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0 bg-[#F9FAFB] overflow-y-auto custom-scrollbar">
+<header class="h-16 flex items-center justify-between px-8 bg-white border-b border-slate-200 sticky top-0 z-40">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-slate-100 border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-indigo-500/20 transition-all outline-none" placeholder="Search data points, reports, or scenarios..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<button class="size-9 flex items-center justify-center text-slate-500 hover:bg-slate-100 rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+</div>
+<button class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-lg shadow-indigo-600/10 transition-all">
+<span class="material-symbols-outlined text-lg">download</span>
+                        Download Report
+                    </button>
+</div>
+</header>
+<main class="p-8">
+<div class="max-w-7xl mx-auto space-y-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-px">
+<div class="space-y-1">
+<h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Reports &amp; Forecasting</h1>
+<p class="text-slate-500 text-sm">Real-time predictive analysis for corporate liquidity</p>
+</div>
+<div class="flex gap-8">
+<button class="pb-4 text-sm font-medium text-slate-500 hover:text-indigo-600 relative transition-colors">
+                                Monthly Summary
+                            </button>
+<button class="pb-4 text-sm font-medium text-slate-500 hover:text-indigo-600 relative transition-colors">
+                                Budget vs Actual
+                            </button>
+<button class="pb-4 text-sm font-bold text-indigo-600 relative">
+                                Forecasting
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600 rounded-full"></span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-6">
+<div class="col-span-12 xl:col-span-9 space-y-6">
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+<div>
+<h3 class="text-base font-bold text-slate-900">Cashflow Projection</h3>
+<p class="text-xs text-slate-500">6-month forward-looking estimate (Confidence Score: 94%)</p>
+</div>
+<div class="flex items-center gap-5 p-1.5 bg-slate-50 rounded-lg border border-slate-100">
+<div class="flex items-center gap-2 px-2 py-1">
+<span class="w-3 h-3 bg-indigo-600 rounded-[2px]"></span>
+<span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Historical</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1">
+<span class="w-3 h-0.5 border-t-2 border-dashed border-emerald-500"></span>
+<span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Predicted</span>
+</div>
+</div>
+</div>
+<div class="relative h-[380px] w-full mt-4">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 350">
+<defs>
+<linearGradient id="grad-hist" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#4F46E5;stop-opacity:0.15"></stop>
+<stop offset="100%" style="stop-color:#4F46E5;stop-opacity:0"></stop>
+</linearGradient>
+<linearGradient id="grad-pred" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#10B981;stop-opacity:0.15"></stop>
+<stop offset="100%" style="stop-color:#10B981;stop-opacity:0"></stop>
+</linearGradient>
+</defs>
+<line stroke="#F1F5F9" stroke-width="1" x1="0" x2="1000" y1="350" y2="350"></line>
+<line stroke="#F8FAFC" stroke-width="1" x1="0" x2="1000" y1="262.5" y2="262.5"></line>
+<line stroke="#F8FAFC" stroke-width="1" x1="0" x2="1000" y1="175" y2="175"></line>
+<line stroke="#F8FAFC" stroke-width="1" x1="0" x2="1000" y1="87.5" y2="87.5"></line>
+<path class="chart-gradient-hist" d="M0 280 L100 240 L200 290 L300 200 L400 230 L500 160 L500 350 L0 350 Z"></path>
+<path d="M0 280 L100 240 L200 290 L300 200 L400 230 L500 160" fill="none" stroke="#4F46E5" stroke-linecap="round" stroke-width="3"></path>
+<path class="chart-gradient-pred" d="M500 160 L600 140 L700 110 L800 130 L900 80 L1000 50 L1000 350 L500 350 Z"></path>
+<path d="M500 160 L600 140 L700 110 L800 130 L900 80 L1000 50" fill="none" stroke="#10B981" stroke-dasharray="8,5" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="500" cy="160" fill="white" r="4" stroke="#4F46E5" stroke-width="2"></circle>
+</svg>
+<div class="flex justify-between items-center mt-6 px-2 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">
+<span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span>
+<span class="text-indigo-600 bg-indigo-50 px-2 py-1 rounded">Current</span>
+<span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden group hover:border-indigo-200 transition-all">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-5xl text-red-600">local_fire_department</span>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<div class="size-10 flex items-center justify-center bg-red-50 text-red-600 rounded-xl">
+<span class="material-symbols-outlined text-xl">local_fire_department</span>
+</div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Predicted Burn Rate</p>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-extrabold text-slate-900">$42,500</h3>
+<span class="text-slate-400 font-medium text-sm">/ mo</span>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<div class="flex items-center text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded text-[11px] font-bold">
+<span class="material-symbols-outlined text-sm">arrow_downward</span> 4.2%
+                                        </div>
+<span class="text-[11px] text-slate-400 font-medium">vs. previous period</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden group hover:border-indigo-200 transition-all">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-5xl text-indigo-600">timer</span>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<div class="size-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-xl">
+<span class="material-symbols-outlined text-xl">timer</span>
+</div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Estimated Runway</p>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-extrabold text-slate-900">18.4</h3>
+<span class="text-slate-400 font-medium text-sm">Months</span>
+</div>
+<div class="mt-4">
+<div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-indigo-500 h-full w-[72%]"></div>
+</div>
+<p class="mt-2 text-[11px] text-slate-400 font-medium flex justify-between">
+<span>Reserve: $782k</span>
+<span>Target: 24m</span>
+</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-indigo-200 transition-all">
+<div class="flex items-center gap-3 mb-6">
+<div class="size-10 flex items-center justify-center bg-emerald-50 text-emerald-600 rounded-xl">
+<span class="material-symbols-outlined text-xl">event_repeat</span>
+</div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Major Expenses</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center p-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors cursor-default">
+<span class="text-xs font-semibold text-slate-700">Cloud Infrastructure</span>
+<span class="text-xs font-extrabold text-slate-900">$12,400</span>
+</div>
+<div class="flex justify-between items-center p-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors cursor-default">
+<span class="text-xs font-semibold text-slate-700">Office Lease</span>
+<span class="text-xs font-extrabold text-slate-900">$8,500</span>
+</div>
+<div class="flex justify-between items-center p-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors cursor-default">
+<span class="text-xs font-semibold text-slate-700">Payroll Taxes</span>
+<span class="text-xs font-extrabold text-slate-900">$6,200</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="col-span-12 xl:col-span-3 space-y-6">
+<div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 overflow-hidden">
+<h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-[0.15em] mb-6 flex items-center gap-2">
+<span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                                    Growth Scenarios
+                                </h3>
+<div class="space-y-3">
+<label class="group block relative cursor-pointer">
+<input checked="" class="peer sr-only" name="scenario" type="radio"/>
+<div class="p-4 rounded-xl border border-slate-100 bg-slate-50 peer-checked:border-indigo-600 peer-checked:bg-indigo-50/50 hover:border-slate-200 transition-all">
+<div class="flex items-center justify-between mb-1">
+<p class="text-sm font-bold text-slate-900">Conservative</p>
+<div class="size-4 border-2 border-slate-300 rounded-full flex items-center justify-center peer-checked:border-indigo-600">
+<div class="size-2 bg-indigo-600 rounded-full opacity-0 peer-checked:opacity-100"></div>
+</div>
+</div>
+<p class="text-[11px] text-slate-500 leading-relaxed">2% MoM growth. Focus on maximizing retention.</p>
+</div>
+</label>
+<label class="group block relative cursor-pointer">
+<input class="peer sr-only" name="scenario" type="radio"/>
+<div class="p-4 rounded-xl border border-slate-100 bg-slate-50 peer-checked:border-indigo-600 peer-checked:bg-indigo-50/50 hover:border-slate-200 transition-all">
+<div class="flex items-center justify-between mb-1">
+<p class="text-sm font-bold text-slate-900">Aggressive</p>
+<div class="size-4 border-2 border-slate-300 rounded-full flex items-center justify-center">
+<div class="size-2 bg-indigo-600 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+</div>
+<p class="text-[11px] text-slate-500 leading-relaxed">15% MoM growth with high acquisition spend.</p>
+</div>
+</label>
+<label class="group block relative cursor-pointer">
+<input class="peer sr-only" name="scenario" type="radio"/>
+<div class="p-4 rounded-xl border border-slate-100 bg-slate-50 peer-checked:border-indigo-600 peer-checked:bg-indigo-50/50 hover:border-slate-200 transition-all">
+<div class="flex items-center justify-between mb-1">
+<p class="text-sm font-bold text-slate-900">Custom Model</p>
+<div class="size-4 border-2 border-slate-300 rounded-full flex items-center justify-center">
+<div class="size-2 bg-indigo-600 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+</div>
+<p class="text-[11px] text-slate-500 leading-relaxed">Modify individual parameters below.</p>
+</div>
+</label>
+</div>
+<div class="mt-8 pt-8 border-t border-slate-100">
+<h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-6">Simulation Controls</h4>
+<div class="space-y-6">
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-600">Headcount Growth</span>
+<span class="text-xs font-bold text-indigo-600">+3 / mo</span>
+</div>
+<input class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-indigo-600" type="range"/>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-600">Churn Rate</span>
+<span class="text-xs font-bold text-indigo-600">1.2%</span>
+</div>
+<input class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-indigo-600" type="range"/>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-xs font-semibold text-slate-600">Ad Spend Multiplier</span>
+<span class="text-xs font-bold text-indigo-600">1.5x</span>
+</div>
+<input class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-indigo-600" type="range"/>
+</div>
+</div>
+<button class="w-full mt-8 py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-lg shadow-slate-200">
+                                        Recalculate Projections
+                                    </button>
+</div>
+</div>
+<div class="bg-gradient-to-br from-indigo-600 to-indigo-700 p-6 rounded-2xl text-white shadow-xl shadow-indigo-200">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-indigo-200">lightbulb</span>
+<h4 class="text-sm font-bold">Forecasting Insight</h4>
+</div>
+<p class="text-xs leading-relaxed text-indigo-100 font-medium">
+                                    Under current "Conservative" settings, your runway is extended by 4 months. Switching to "Aggressive" will require funding by June 2024.
+                                </p>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<footer class="mt-auto border-t border-slate-200 bg-white px-8 py-6">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">© 2023 NeoLedger Finance Engine</p>
+<div class="flex gap-6">
+<a class="text-xs font-medium text-slate-500 hover:text-indigo-600" href="#">System Status</a>
+<a class="text-xs font-medium text-slate-500 hover:text-indigo-600" href="#">API Documentation</a>
+<a class="text-xs font-medium text-slate-500 hover:text-indigo-600" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+
+</body></html>
