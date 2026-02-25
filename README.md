@@ -1,59 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📊 NeoLedger — Cashflow Management System
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-12-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 12">
+  <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.2+">
+  <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/TailwindCSS-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="TailwindCSS">
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📖 Tentang NeoLedger
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**NeoLedger** adalah sistem manajemen arus kas (cashflow) berbasis web yang dirancang untuk membantu bisnis dalam mengelola keuangan secara akurat, transparan, dan efisien. Sistem ini menyediakan pencatatan transaksi pemasukan dan pengeluaran, pengelolaan anggaran, hingga pelaporan keuangan dalam satu platform terpadu.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+NeoLedger dibangun dengan pendekatan **multi-user** dan **role-based access control (RBAC)**, sehingga setiap pengguna memiliki hak akses yang sesuai dengan perannya — mulai dari **Admin** yang memiliki kontrol penuh, **Manager** yang bertanggung jawab atas persetujuan transaksi, hingga **Staff** yang bertugas menginput data harian.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🎯 Latar Belakang
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Pengelolaan arus kas merupakan aspek krusial dalam operasional bisnis. Tanpa sistem yang baik, risiko kebocoran dana, pencatatan ganda, dan ketidakakuratan laporan keuangan menjadi tinggi. NeoLedger hadir sebagai solusi untuk:
 
-## Laravel Sponsors
+- **Menghilangkan pencatatan manual** yang rawan kesalahan
+- **Menyediakan approval workflow** untuk memastikan setiap transaksi terverifikasi
+- **Menghasilkan laporan real-time** yang membantu pengambilan keputusan
+- **Menjaga jejak audit** untuk keperluan transparansi dan akuntabilitas
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## ✨ Fitur Utama
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 💰 Manajemen Transaksi
+Pencatatan pemasukan dan pengeluaran dengan dukungan **approval workflow** bertingkat. Setiap transaksi melewati proses verifikasi (pending → approved/rejected) untuk menjaga keakuratan data keuangan. Dilengkapi fitur lampiran dokumen pendukung.
 
-## Contributing
+### 🔄 Transfer Antar Akun
+Pemindahan dana antar akun bank atau kas tercatat otomatis di kedua sisi — akun pengirim dan penerima — sehingga saldo selalu sinkron tanpa perlu input manual berulang.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 🏦 Manajemen Akun
+Pengelolaan berbagai jenis akun keuangan (bank, kas, e-wallet) dengan pemantauan saldo real-time. Setiap mutasi tercatat dan dapat ditelusuri.
 
-## Code of Conduct
+### 📊 Anggaran & Realisasi
+Penetapan budget per kategori per bulan. Sistem secara otomatis melacak realisasi pengeluaran dan memberikan peringatan ketika anggaran mendekati atau melampaui batas.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 🔁 Transaksi Berulang
+Penjadwalan transaksi otomatis untuk pembayaran rutin seperti gaji, sewa, atau tagihan bulanan. Mendukung frekuensi harian, mingguan, bulanan, dan tahunan.
 
-## Security Vulnerabilities
+### 📈 Laporan Keuangan
+Laporan komprehensif per periode yang menampilkan total pemasukan, pengeluaran, dan saldo bersih. Dilengkapi breakdown per kategori dengan visualisasi progress bar dan persentase.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 📥 Export Data
+Export data ke format **Excel (XLSX)**, **CSV**, dan **PDF** dengan template profesional berbranding NeoLedger. Mendukung export dengan filter aktif — hanya data yang ditampilkan yang akan diekspor.
 
-## License
+### 👥 Manajemen Pengguna & Hak Akses
+Sistem RBAC dengan tiga level peran:
+- **Admin** — Akses penuh ke seluruh fitur dan konfigurasi sistem
+- **Manager** — Approval transaksi dan akses laporan
+- **Staff** — Input transaksi dan akses terbatas
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 📝 Audit Log
+Setiap aktivitas tercatat secara otomatis — siapa melakukan apa, kapan, dari IP mana, dan menggunakan perangkat apa. Mendukung kebutuhan compliance dan investigasi.
+
+### 🔔 Notifikasi
+Pemberitahuan otomatis untuk transaksi yang membutuhkan persetujuan, perubahan status, dan aktivitas penting lainnya.
+
+### 🌙 Dark Mode
+Tampilan mode gelap yang dirancang secara konsisten di seluruh halaman, memberikan kenyamanan visual saat bekerja dalam waktu lama.
+
+---
+
+## 🛠️ Teknologi
+
+| Layer | Teknologi |
+|-------|-----------|
+| Backend | Laravel 12, PHP 8.2+ |
+| Frontend | Blade Templates, TailwindCSS, Alpine.js |
+| Database | MySQL 8.0 |
+| Ekspor | Maatwebsite Excel, Barryvdh DomPDF |
+| Autentikasi | Laravel Breeze |
+| Email | SMTP (dukungan Gmail, cPanel, dll) |
+
+---
+
+## � Arsitektur Sistem
+
+NeoLedger mengikuti arsitektur **MVC (Model-View-Controller)** yang merupakan standar Laravel, dengan penambahan beberapa layer:
+
+- **Models** dengan trait `Auditable` untuk pencatatan otomatis ke audit log
+- **Export Classes** berbasis Maatwebsite untuk generate file spreadsheet
+- **Blade Components** yang reusable untuk konsistensi UI (export button, modal, dsb.)
+- **PDF Templates** dengan styling inline untuk kompatibilitas email client
+
+---
+
+## 🔒 Keamanan
+
+- Autentikasi dengan hashing bcrypt
+- Password reset via email dengan token berumur terbatas
+- RBAC middleware pada setiap route
+- Audit trail otomatis untuk setiap perubahan data
+- CSRF protection pada seluruh form
+- Input validation di controller dan form request
+
+---
+
+<p align="center">
+  Dikembangkan oleh <strong>NeoOne</strong> · 2026
+</p>
