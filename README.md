@@ -91,18 +91,3 @@ NeoLedger mengikuti arsitektur **MVC (Model-View-Controller)** yang merupakan st
 - **PDF Templates** dengan styling inline untuk kompatibilitas email client
 
 ---
-
-## 🔒 Keamanan
-
-- Autentikasi dengan hashing bcrypt
-- Password reset via email dengan token berumur terbatas
-- RBAC middleware pada setiap route
-- Audit trail otomatis untuk setiap perubahan data
-- CSRF protection pada seluruh form
-- Input validation di controller dan form request
-
----
-
-<p align="center">
-  Dikembangkan oleh <strong>NeoOne</strong> · 2026
-</p>
