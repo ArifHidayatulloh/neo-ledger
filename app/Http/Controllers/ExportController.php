@@ -49,6 +49,18 @@ class ExportController extends Controller
         };
     }
 
+    public function invoices(Request $request)
+    {
+        $filters = $request->only(['search', 'status', 'client_id', 'date_from', 'date_to']);
+        $filename = 'invoices_' . now()->format('Y-m-d_His');
+
+        return match ($request->get('format', 'xlsx')) {
+            'csv' => Excel::download(new \App\Exports\InvoicesExport($filters), $filename . '.csv', \Maatwebsite\Excel\Excel::CSV),
+            'pdf' => $this->invoicesPdf($filters, $filename),
+            default => Excel::download(new \App\Exports\InvoicesExport($filters), $filename . '.xlsx'),
+        };
+    }
+
     // ── PDF Helpers ─────────────────────────────────────────────
 
     private function transactionsPdf(array $filters, string $filename)
@@ -110,6 +122,32 @@ class ExportController extends Controller
 
         $pdf = Pdf::loadView('exports.audit-logs-pdf', [
             'logs' => $query->get(),
+            'filters' => $filters,
+        ])->setPaper('a4', 'landscape');
+
+        return $pdf->download($filename . '.pdf');
+    }
+
+    private function invoicesPdf(array $filters, string $filename)
+    {
+        $query = \App\Models\Invoice::with(['client', 'spk'])->orderBy('created_at', 'desc');
+
+        if (!empty($filters['status'])) $query->where('status', $filters['status']);
+        if (!empty($filters['client_id'])) $query->where('client_id', $filters['client_id']);
+        if (!empty($filters['date_from'])) $query->whereDate('created_at', '>=', $filters['date_from']);
+        if (!empty($filters['date_to'])) $query->whereDate('created_at', '<=', $filters['date_to']);
+
+        if (!empty($filters['search'])) {
+            $s = $filters['search'];
+            $query->where(function ($q) use ($s) {
+                $q->where('invoice_number', 'like', "%{$s}%")
+                  ->orWhereHas('spk', fn($q2) => $q2->where('spk_ref', 'like', "%{$s}%"))
+                  ->orWhereHas('client', fn($q3) => $q3->where('name', 'like', "%{$s}%"));
+            });
+        }
+
+        $pdf = Pdf::loadView('exports.invoices-pdf', [
+            'invoices' => $query->get(),
             'filters' => $filters,
         ])->setPaper('a4', 'landscape');
 

@@ -14,6 +14,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect root to dashboard
@@ -73,10 +74,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
 
+    // ── Invoices (SPK / system-generated) ───────────────────────
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/create/{spk?}', [InvoiceController::class, 'create'])->name('invoices.create');
+    Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
+    Route::get('/invoices/{invoice}/pdf', [InvoiceController::class, 'downloadPdf'])->name('invoices.downloadPdf');
+    Route::get('/invoices/{invoice}/send', [InvoiceController::class, 'sendEmail'])->name('invoices.sendEmail');
+    Route::post('/invoices/{invoice}/paid', [InvoiceController::class, 'markPaid'])->name('invoices.markPaid');
+
+    // ── Clients & SPKs ─────────────────────────────────────────
+    Route::resource('clients', \App\Http\Controllers\ClientController::class)->except(['destroy']);
+    Route::resource('spks', \App\Http\Controllers\SpkController::class);
+
     // ── Export ───────────────────────────────────────────────────
     Route::get('/export/transactions', [ExportController::class, 'transactions'])->name('export.transactions');
     Route::get('/export/reports', [ExportController::class, 'reports'])->name('export.reports');
     Route::get('/export/audit-logs', [ExportController::class, 'auditLogs'])->name('export.audit-logs');
+    Route::get('/export/invoices', [ExportController::class, 'invoices'])->name('export.invoices');
 
     // ── Notifications ───────────────────────────────────────────
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');

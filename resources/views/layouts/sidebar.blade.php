@@ -13,6 +13,24 @@
             'permission' => 'transactions.view',
         ],
         [
+            'label' => 'Invoice',
+            'route' => 'invoices.index',
+            'icon' => 'document-chart-bar',
+            'permission' => 'invoices.view',
+        ],
+        [
+            'label' => 'Client',
+            'route' => 'clients.index',
+            'icon' => 'users',
+            'permission' => 'clients.view',
+        ],
+        [
+            'label' => 'SPK',
+            'route' => 'spks.index',
+            'icon' => 'clipboard-document-list',
+            'permission' => 'spks.view',
+        ],
+        [
             'label' => 'Akun / Rekening',
             'route' => 'accounts.index',
             'icon' => 'building-library',
